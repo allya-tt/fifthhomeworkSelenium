@@ -1,4 +1,3 @@
-import com.codeborne.selenide.commands.As;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
-public class real_homework {
+public class realHomework {
     private WebDriver driver;
     @BeforeEach
     public void setUp() {
@@ -33,9 +32,9 @@ public class real_homework {
     }
     @Test
     public void formTest() throws InterruptedException {
-        String url = "https://demoqa.com/automation-practice-form";
+        String url = "http://demoqa.com/automation-practice-form";
         driver.get(url);
-        driver.manage().window().maximize();
+
 //        JavascriptExecutor executor = (JavascriptExecutor)driver;
 //        executor.executeScript("document.body.style.zoom = '0.70'");
 
@@ -53,6 +52,7 @@ public class real_homework {
         inputEmail.sendKeys("rrr03@mail.ru");
         Thread.sleep(2000);
 
+//        wait.until(ExpectedConditions.elementToBeClickable((By.cssSelector("label[for='gender-radio-2']")))).click();
         WebElement radiobutton = driver.findElement(By.cssSelector("label[for='gender-radio-2']"));
         radiobutton.click();
         Thread.sleep(2000);
@@ -79,7 +79,8 @@ public class real_homework {
         Thread.sleep(2000);
 
         WebElement inputSubjects = driver.findElement(By.id("subjectsInput"));
-        inputSubjects.sendKeys("something");
+        inputSubjects.sendKeys("English");
+        driver.findElement(By.id("react-select-2-option-0")).click();
         Thread.sleep(2000);
 
         WebElement checkbox1 = driver.findElement(By.cssSelector("label[for='hobbies-checkbox-1']"));
@@ -127,7 +128,7 @@ public class real_homework {
         Assertions.assertEquals("Female", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(3) > td:last-child")).getText());
         Assertions.assertEquals("5555555555", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(4) > td:last-child")).getText());
         Assertions.assertEquals("08 January,2003", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(5) > td:last-child")).getText());
-        Assertions.assertEquals("", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(6) > td:last-child")).getText());
+        Assertions.assertEquals("English", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(6) > td:last-child")).getText());
         Assertions.assertEquals("Sports, Music", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(7) > td:last-child")).getText());
         Assertions.assertEquals("_opuOWMKaA8.jpg", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(8) > td:last-child")).getText());
         Assertions.assertEquals("something", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(9) > td:last-child")).getText());
