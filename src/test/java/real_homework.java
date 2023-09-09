@@ -3,19 +3,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
-public class realHomework {
+public class RealHomework {
     private WebDriver driver;
     @BeforeEach
     public void setUp() {
@@ -31,12 +31,10 @@ public class realHomework {
             driver = new EdgeDriver();}
     }
     @Test
-    public void formTest() throws InterruptedException {
+    public void formTest() throws InterruptedException, AWTException {
         String url = "http://demoqa.com/automation-practice-form";
         driver.get(url);
-
-//        JavascriptExecutor executor = (JavascriptExecutor)driver;
-//        executor.executeScript("document.body.style.zoom = '0.70'");
+        driver.manage().window().maximize();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15), Duration.ofMillis(500));
         wait.until(ExpectedConditions.presenceOfElementLocated(
@@ -80,7 +78,7 @@ public class realHomework {
 
         WebElement inputSubjects = driver.findElement(By.id("subjectsInput"));
         inputSubjects.sendKeys("English");
-        driver.findElement(By.id("react-select-2-option-0")).click();
+        inputSubjects.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
         WebElement checkbox1 = driver.findElement(By.cssSelector("label[for='hobbies-checkbox-1']"));
@@ -117,10 +115,20 @@ public class realHomework {
         driver.findElement(By.id("react-select-4-option-0")).click();
         Thread.sleep(2000);
 
-
+        Robot robot = new Robot();
+        for (int i = 0; i < 3; i++) {
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_MINUS);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyRelease(KeyEvent.VK_MINUS);
+        }
+        Thread.sleep(2000);
+//        JavascriptExecutor executor = (JavascriptExecutor)driver;
+//        executor.executeScript("document.body.style.zoom = '0.67'");
         WebElement button = driver.findElement(By.id("submit"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", button);
         Thread.sleep(2000);
+        wait.until(ExpectedConditions.elementToBeClickable(button));
         button.click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("example-modal-sizes-title-lg")));
         Assertions.assertEquals("Aleksandra Telesheva", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:first-child > td:nth-child(2)")).getText());
