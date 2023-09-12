@@ -102,17 +102,17 @@ public class RealHomework {
         inputAddress.sendKeys("something");
         Thread.sleep(2000);
 
-        WebElement frstDropdown = driver.findElement(By.cssSelector("#state"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", frstDropdown);
-        frstDropdown.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("react-select-3-option-0")));
-        driver.findElement(By.id("react-select-3-option-0")).click();
-        Thread.sleep(2000);
 
-        WebElement scndDropdown = driver.findElement(By.cssSelector("#city"));
-        scndDropdown.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("react-select-4-option-0")));
-        driver.findElement(By.id("react-select-4-option-0")).click();
+        WebElement state = driver.findElement(By.id("react-select-3-input"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", state);
+        String userState = "NCR";
+        state.sendKeys(userState);
+        state.sendKeys(Keys.ENTER);
+
+        WebElement city = driver.findElement(By.id("react-select-4-input"));
+        String userCity = "Delhi";
+        city.sendKeys(userCity);
+        city.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
         Robot robot = new Robot();
