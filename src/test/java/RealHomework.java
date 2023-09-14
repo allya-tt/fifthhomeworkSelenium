@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import java.time.Duration;
 
 public class RealHomework {
     private WebDriver driver;
+
     @BeforeEach
     public void setUp() {
         String browser = System.getProperty("browser");
@@ -28,8 +30,10 @@ public class RealHomework {
             driver = new FirefoxDriver();
         } else if (browser.equals("edge")) {
             WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();}
+            driver = new EdgeDriver();
+        }
     }
+
     @Test
     public void formTest() throws InterruptedException, AWTException {
         String url = "http://demoqa.com/automation-practice-form";
@@ -49,7 +53,7 @@ public class RealHomework {
         WebElement inputEmail = driver.findElement(By.id("userEmail"));
         inputEmail.sendKeys("rrr03@mail.ru");
         Thread.sleep(2000);
-
+        System.out.println(inputEmail.getAttribute("value"));
 //        wait.until(ExpectedConditions.elementToBeClickable((By.cssSelector("label[for='gender-radio-2']")))).click();
         WebElement radiobutton = driver.findElement(By.cssSelector("label[for='gender-radio-2']"));
         radiobutton.click();
@@ -78,6 +82,8 @@ public class RealHomework {
 
         WebElement inputSubjects = driver.findElement(By.id("subjectsInput"));
         inputSubjects.sendKeys("English");
+        inputSubjects.sendKeys(Keys.ENTER);
+        inputSubjects.sendKeys("Biology");
         inputSubjects.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
 
@@ -131,21 +137,24 @@ public class RealHomework {
         wait.until(ExpectedConditions.elementToBeClickable(button));
         button.click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("example-modal-sizes-title-lg")));
-        Assertions.assertEquals("Aleksandra Telesheva", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:first-child > td:nth-child(2)")).getText());
-        Assertions.assertEquals("rrr03@mail.ru", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(2) > td:nth-child(2)")).getText());
-        Assertions.assertEquals("Female", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(3) > td:last-child")).getText());
-        Assertions.assertEquals("5555555555", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(4) > td:last-child")).getText());
-        Assertions.assertEquals("08 January,2003", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(5) > td:last-child")).getText());
-        Assertions.assertEquals("English", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(6) > td:last-child")).getText());
-        Assertions.assertEquals("Sports, Music", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(7) > td:last-child")).getText());
-        Assertions.assertEquals("_opuOWMKaA8.jpg", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(8) > td:last-child")).getText());
-        Assertions.assertEquals("something", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(9) > td:last-child")).getText());
-        Assertions.assertEquals("NCR Delhi", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(10) > td:last-child")).getText());
+//
+        SoftAssertions softAssert = new SoftAssertions();
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(1) > td:nth-child(2)")).getText()).isEqualTo(inputFirstName.getAttribute("value") + " " + inputLastName.getAttribute("value"));
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(2)")).getText()).isEqualTo(inputEmail.getAttribute("value"));
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(2)")).getText()).isEqualTo(radiobutton.getAttribute("value"));
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(4) > td:nth-child(2)")).getText()).isEqualTo(inputNumber.getAttribute("value"));
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(5) > td:nth-child(2)")).getText()).isEqualTo(selectDay + " " + selectDropdownMonth + "," + selectDropdownYear);
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(6) > td:nth-child(2)")).getText()).isEqualTo(inputSubjects);
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(7) > td:nth-child(2)")).getText()).isEqualTo(checkbox1.getText() + ", " + checkbox2.getText());
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(8) > td:nth-child(2)")).getText()).isEqualTo(uploadFile.getText());
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(9) > td:nth-child(2)")).getText()).isEqualTo(inputAddress.getAttribute("value"));
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(10) > td:nth-child(2)")).getText()).isEqualTo(state + " " + city);
+        softAssert.assertAll();
         Thread.sleep(2000);
     }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
 }
