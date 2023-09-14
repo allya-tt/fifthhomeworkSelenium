@@ -53,7 +53,6 @@ public class RealHomework {
         WebElement inputEmail = driver.findElement(By.id("userEmail"));
         inputEmail.sendKeys("rrr03@mail.ru");
         Thread.sleep(2000);
-        System.out.println(inputEmail.getAttribute("value"));
 //        wait.until(ExpectedConditions.elementToBeClickable((By.cssSelector("label[for='gender-radio-2']")))).click();
         WebElement radiobutton = driver.findElement(By.cssSelector("label[for='gender-radio-2']"));
         radiobutton.click();
