@@ -138,18 +138,29 @@ public class RealHomework {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("example-modal-sizes-title-lg")));
 //
         SoftAssertions softAssert = new SoftAssertions();
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(1) > td:nth-child(2)")).getText()).isEqualTo(inputFirstName.getAttribute("value") + " " + inputLastName.getAttribute("value"));
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(2)")).getText()).isEqualTo(inputEmail.getAttribute("value"));
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(2)")).getText()).isEqualTo(radiobutton.getAttribute("value"));
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(4) > td:nth-child(2)")).getText()).isEqualTo(inputNumber.getAttribute("value"));
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(5) > td:nth-child(2)")).getText()).isEqualTo(selectDay + " " + selectDropdownMonth + "," + selectDropdownYear);
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(6) > td:nth-child(2)")).getText()).isEqualTo(inputSubjects);
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(7) > td:nth-child(2)")).getText()).isEqualTo(checkbox1.getText() + ", " + checkbox2.getText());
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(8) > td:nth-child(2)")).getText()).isEqualTo(uploadFile.getText());
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(9) > td:nth-child(2)")).getText()).isEqualTo(inputAddress.getAttribute("value"));
-        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(10) > td:nth-child(2)")).getText()).isEqualTo(state + " " + city);
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(1) > td:nth-child(2)")).getText()).isEqualTo("Aleksandra Telesheva");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(2)")).getText()).isEqualTo("rrr03@mail.ru");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(3) > td:nth-child(2)")).getText()).isEqualTo("Female");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(4) > td:nth-child(2)")).getText()).isEqualTo("5555555555");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(5) > td:nth-child(2)")).getText()).isEqualTo("08 January,2003");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(6) > td:nth-child(2)")).getText()).isEqualTo("English, Biology");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(7) > td:nth-child(2)")).getText()).isEqualTo("Sports, Music");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(8) > td:nth-child(2)")).getText()).isEqualTo("_opuOWMKaA8.jpg");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(9) > td:nth-child(2)")).getText()).isEqualTo("something");
+        softAssert.assertThat(driver.findElement(By.cssSelector("tr:nth-child(10) > td:nth-child(2)")).getText()).isEqualTo("NCR Delhi");
         softAssert.assertAll();
-        Thread.sleep(2000);
+
+//        Assertions.assertEquals("Aleksandra Telesheva", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:first-child > td:nth-child(2)")).getText());
+//        Assertions.assertEquals("rrr03@mail.ru", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(2) > td:nth-child(2)")).getText());
+//        Assertions.assertEquals("Female", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(3) > td:last-child")).getText());
+//        Assertions.assertEquals("5555555555", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(4) > td:last-child")).getText());
+//        Assertions.assertEquals("08 January,2003", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(5) > td:last-child")).getText());
+//        Assertions.assertEquals("English", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(6) > td:last-child")).getText());
+//        Assertions.assertEquals("Sports, Music", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(7) > td:last-child")).getText());
+//        Assertions.assertEquals("_opuOWMKaA8.jpg", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(8) > td:last-child")).getText());
+//        Assertions.assertEquals("something", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(9) > td:last-child")).getText());
+//        Assertions.assertEquals("NCR Delhi", driver.findElement(By.cssSelector("div[class='table-responsive'] tbody > tr:nth-child(10) > td:last-child")).getText());
+//        Thread.sleep(2000);
     }
 
     @AfterEach
